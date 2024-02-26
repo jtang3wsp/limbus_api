@@ -1,46 +1,54 @@
 import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import Identity from "./models/identityModel.js";
+import EGO from "./models/egoModel.js";
 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
-
 app.use(express.json());
 
-const sinners = [
-  { id: 1, name: "Yi Sang" },
-  { id: 2, name: "Faust" },
-  { id: 3, name: "Don Quixote" },
-  { id: 4, name: "Ryoshu" },
-];
+// Load database into memory
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to database"))
+  .catch((error) => console.log(error));
 
+const identities = await Identity.find({});
+const egos = await EGO.find({});
+
+mongoose.connection.close();
+
+// temp
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.get("/api/sinners", (req, res) => {
-  res.send(sinners);
+// Get identities
+app.get("/api/identities", (req, res) => {
+  res.send(identities);
 });
 
-app.post("/api/sinners", (req, res) => {
-  const schema = {
-    name: Joi.string().min(3).required(),
-  };
-
-  const result = Joi.validate(req.body, schema);
-  console.log(result);
-
-  const sinner = {
-    id: sinners.length + 1,
-    name: req.body.name,
-  };
-  sinners.push(sinner);
-  res.send(sinner);
+// Get egos
+app.get("/api/egos", (req, res) => {
+  res.send(egos);
 });
 
-app.get("/api/sinners/:id", (req, res) => {
-  const sinner = sinners.find((s) => s.id === parseInt(req.params.id));
-  if (!sinner)
-    res.status(404).send("The sinner with the given ID was not found.");
-  res.send(sinner);
+// Get all identities for a specific sinner
+app.get("/api/identities/:sinner", (req, res) => {
+  const { sinner } = req.params;
+  const sinnerIDs = identities.filter((identity) =>
+    identity.name.includes(sinner)
+  );
+  res.send(sinnerIDs);
+});
+
+// Get all egos for a specific sinner
+app.get("/api/egos/:sinner", (req, res) => {
+  const { sinner } = req.params;
+  const sinnerEGOs = egos.filter((ego) => ego.sinner == sinner);
+  res.send(sinnerEGOs);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
