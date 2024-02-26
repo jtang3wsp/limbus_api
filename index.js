@@ -38,8 +38,9 @@ app.get("/api/egos", (req, res) => {
 // Get all identities for a specific sinner
 app.get("/api/identities/:sinner", (req, res) => {
   const { sinner } = req.params;
+  const name = sinner.toLowerCase();
   const sinnerIDs = identities.filter((identity) =>
-    identity.name.includes(sinner)
+    identity.name.toLowerCase().includes(name)
   );
   res.send(sinnerIDs);
 });
@@ -47,7 +48,8 @@ app.get("/api/identities/:sinner", (req, res) => {
 // Get all egos for a specific sinner
 app.get("/api/egos/:sinner", (req, res) => {
   const { sinner } = req.params;
-  const sinnerEGOs = egos.filter((ego) => ego.sinner == sinner);
+  const name = sinner.toLowerCase();
+  const sinnerEGOs = egos.filter((ego) => ego.sinner.toLowerCase() == name);
   res.send(sinnerEGOs);
 });
 
