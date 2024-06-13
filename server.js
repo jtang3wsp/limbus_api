@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Identity from "./models/identityModel.js";
 import EGO from "./models/egoModel.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cors());
 
 // Load database into memory
 mongoose
@@ -15,8 +17,8 @@ mongoose
   .then(() => console.log("Connected to database"))
   .catch((error) => console.log(error));
 
-const identities = await Identity.find({});
-const egos = await EGO.find({});
+const identities = await Identity.find({}, "-_id");
+const egos = await EGO.find({}, "-_id");
 
 mongoose.connection.close();
 
