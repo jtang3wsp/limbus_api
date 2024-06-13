@@ -1,10 +1,11 @@
 import React from "react";
 import { JSONTree } from "react-json-tree";
+import { theme } from "../themes/Theme.js";
 
 export const Results = ({ results }) => {
   const style = {
-    "background-color": "#012a36",
-    "padding-left": "1.5em",
+    "background-color": theme.base00,
+    "padding-left": "1em",
     "padding-top": "0.5em",
   };
 
@@ -25,12 +26,17 @@ export const Results = ({ results }) => {
 
   return (
     <div style={style}>
-      <JSONTree
-        data={results}
-        hideRoot={true}
-        labelRenderer={labelRenderer}
-        getItemString={() => null}
-      />
+      {results.length === 0 ? (
+        <div>No results</div>
+      ) : (
+        <JSONTree
+          data={results}
+          hideRoot={true}
+          labelRenderer={labelRenderer}
+          getItemString={() => null}
+          theme={theme}
+        />
+      )}
     </div>
   );
 };
