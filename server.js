@@ -51,7 +51,7 @@ app.get("/api/identities/:sinner", (req, res) => {
 app.get("/api/egos/:sinner", (req, res) => {
   const { sinner } = req.params;
   const name = sinner.toLowerCase();
-  const sinnerEGOs = egos.filter((ego) => ego.sinner.toLowerCase() == name);
+  const sinnerEGOs = egos.filter((ego) => ego.sinner.toLowerCase() === name);
   res.send(sinnerEGOs);
 });
 
