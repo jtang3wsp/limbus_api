@@ -16,7 +16,7 @@ export const Results = ({ results }) => {
     // top level field (name)
     if (pathSegments.length === 1) {
       const item = results[label];
-      return <span>{item.name || `${item.sinner} - ${item.ego}`}</span>;
+      return <span>{item.name}</span>;
     }
     if (nodeType === "Object" || nodeType === "Array") {
       return <span>{label}</span>;
