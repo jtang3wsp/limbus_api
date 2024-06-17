@@ -30,6 +30,7 @@ export const Results = ({ results }) => {
         <div>No results</div>
       ) : (
         <JSONTree
+          key={JSON.stringify(results)}
           data={results}
           hideRoot={true}
           labelRenderer={labelRenderer}
