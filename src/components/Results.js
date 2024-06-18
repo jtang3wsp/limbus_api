@@ -4,10 +4,8 @@ import { JSONTree } from "react-json-tree";
 import { theme } from "../themes/Theme.js";
 
 const ResultsContainer = styled.div`
-  ${
-    "" /* word-wrap: break-word;
-  white-space: pre-wrap; */
-  }
+  word-wrap: break-word;
+  white-space: pre-wrap;
 `;
 
 export const Results = ({ results }) => {
