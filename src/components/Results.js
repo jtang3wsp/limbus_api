@@ -4,9 +4,10 @@ import { JSONTree } from "react-json-tree";
 import { theme } from "../themes/Theme.js";
 
 const ResultsContainer = styled.div`
-  backgroundColor: theme.base00;
-  padding-left: 1em
-  padding-top: 0.5em
+  ${
+    "" /* word-wrap: break-word;
+  white-space: pre-wrap; */
+  }
 `;
 
 export const Results = ({ results }) => {
