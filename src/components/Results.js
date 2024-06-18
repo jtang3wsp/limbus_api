@@ -1,14 +1,15 @@
 import React from "react";
+import styled from "styled-components";
 import { JSONTree } from "react-json-tree";
 import { theme } from "../themes/Theme.js";
 
-export const Results = ({ results }) => {
-  const style = {
-    "background-color": theme.base00,
-    "padding-left": "1em",
-    "padding-top": "0.5em",
-  };
+const ResultsContainer = styled.div`
+  backgroundColor: theme.base00;
+  padding-left: 1em
+  padding-top: 0.5em
+`;
 
+export const Results = ({ results }) => {
   // style labels
   const labelRenderer = (pathSegments, nodeType) => {
     const label = pathSegments[0];
@@ -25,7 +26,7 @@ export const Results = ({ results }) => {
   };
 
   return (
-    <div style={style}>
+    <ResultsContainer>
       {results.length === 0 ? (
         <div>No results</div>
       ) : (
@@ -38,6 +39,6 @@ export const Results = ({ results }) => {
           theme={theme}
         />
       )}
-    </div>
+    </ResultsContainer>
   );
 };

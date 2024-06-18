@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { QueryBox } from "./components/QueryBox.js";
-import { Tabs } from "./components/Tabs.js";
+// import { QueryBox } from "./components/QueryBox.js";
+import { Filters } from "./components/Filters.js";
 import { Results } from "./components/Results.js";
 import { theme } from "./themes/Theme.js";
 
@@ -26,9 +26,9 @@ function App() {
   return (
     <div style={appStyle}>
       <div style={tabStyle}>
-        <Tabs />
+        <Filters setResults={setResults} />
       </div>
-      <QueryBox setResults={setResults} />
+      {/* <QueryBox setResults={setResults} /> */}
       <Results results={results} />
     </div>
   );
