@@ -17,8 +17,8 @@ mongoose
   .then(() => console.log("Connected to database"))
   .catch((error) => console.log(error));
 
-const identities = await Identity.find({}, "-_id");
-const egos = await EGO.find({}, "-_id");
+const identities = await Identity.find({}, "-_id").lean();
+const egos = await EGO.find({}, "-_id").lean();
 
 mongoose.connection.close();
 
