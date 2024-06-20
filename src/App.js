@@ -29,7 +29,7 @@ const Header = styled.div`
 const Body = styled.div`
   display: flex;
   width: 100%;
-  padding: 125px 0px 100px 20px;
+  padding: 150px 0px 100px 20px;
   background-color: ${(props) => props.backgroundColor};
 `;
 
