@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { SINNERS } from "../utils/Constants.js";
+import { theme } from "../themes/Theme.js";
 
 const Container = styled.div`
   display: flex;
@@ -24,9 +25,11 @@ const SinnerList = styled.div`
 
 const CategoryButton = styled.button`
   padding: 8px;
-  min-width: 100pxpx;
+  min-width: 100px;
   flex: 1;
-  background-color: ${(props) => (props.selected ? "blue" : "gray")};
+  font-weight: bold;
+  background-color: ${(props) =>
+    props.selected ? "cornflowerblue" : theme.base03};
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -34,10 +37,12 @@ const CategoryButton = styled.button`
 
 const SinnerButton = styled.button`
   padding: 8px;
-  min-width: 75px;
+  min-width: 60px;
   height: 60px;
   flex: 1;
-  background-color: ${(props) => (props.selected ? "blue" : "gray")};
+  font-weight: bold;
+  background-color: ${(props) =>
+    props.selected ? "cornflowerblue" : theme.base03};
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -151,7 +156,8 @@ export const Filters = ({ setResults }) => {
           </SinnerButton>
         ))}
         <SinnerButton onClick={toggleAllSinners} selected={allSelected}>
-          {allSelected ? "Deselect All" : "Select All"}
+          {/* {allSelected ? "RESET" : "ALL"} */}
+          ALL
         </SinnerButton>
       </SinnerList>
     </Container>
