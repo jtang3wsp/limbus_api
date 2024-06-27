@@ -17,10 +17,39 @@ mongoose
   .then(() => console.log("Connected to database"))
   .catch((error) => console.log(error));
 
-const identities = await Identity.find({}, "-_id").lean();
-const egos = await EGO.find({}, "-_id").lean();
+const idData = await Identity.find({}, "-_id").lean();
+const egoData = await EGO.find({}, "-_id").lean();
 
 mongoose.connection.close();
+
+// Order fields
+const identities = idData.map((id) => {
+  return {
+    name: id.name,
+    sinner: id.sinner,
+    rarity: id.rarity,
+    HP: id.HP,
+    speed: id.speed,
+    defenseModifier: id.defenseModifier,
+    resistances: id.resistances,
+    staggerThresholds: id.staggerThresholds,
+    skills: id.skills,
+    passives: id.passives,
+  };
+});
+
+const egos = egoData.map((ego) => {
+  return {
+    name: ego.name,
+    ego: ego.ego,
+    sinner: ego.sinner,
+    classification: ego.classification,
+    resistances: ego.resistances,
+    sinCost: ego.sinCost,
+    skills: ego.skills,
+    passive: ego.passive,
+  };
+});
 
 // temp
 app.get("/", (req, res) => {
