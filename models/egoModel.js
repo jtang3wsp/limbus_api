@@ -2,35 +2,51 @@ import mongoose from "mongoose";
 
 // schema
 const egoSchema = new mongoose.Schema({
+  name: String,
   ego: String,
   sinner: String,
   classification: String,
-  season: String,
-  wrathResistance: Number,
-  lustResistance: Number,
-  slothResistance: Number,
-  gluttonyResistance: Number,
-  gloomResistance: Number,
-  prideResistance: Number,
-  envyResistance: Number,
-  sinCost: [Number],
+  // season: String,
+  resistances: {
+    wrath: Number,
+    lust: Number,
+    sloth: Number,
+    gluttony: Number,
+    gloom: Number,
+    pride: Number,
+    envy: Number,
+  },
+  sinCost: {
+    wrath: Number,
+    lust: Number,
+    sloth: Number,
+    gluttony: Number,
+    gloom: Number,
+    pride: Number,
+    envy: Number,
+  },
   skills: [
     {
-      skillName: String,
+      _id: false,
+      skillType: String,
       basePower: Number,
       coinPower: Number,
-      skillDescription: String,
-      offenseLevel: Number,
-      attackWeight: Number,
-      sinType: String,
+      numCoins: Number,
       damageType: String,
+      sinType: String,
+      // gll no offense mod
+      offenseModifier: Number,
+      attackWeight: { min: Number, max: Number },
       sanityCost: Number,
+      skillDescription: String,
     },
   ],
-  passiveName: String,
-  passiveDescription: String,
+  passive: {
+    passiveName: String,
+    passiveDescription: String,
+  },
 });
 
-egoSchema.index({ sinner: 1, ego: 1 }, { unique: true });
+egoSchema.index({ name: 1 }, { unique: true });
 
-export default mongoose.model("EGO", egoSchema);
+export default mongoose.model("Ego", egoSchema);
